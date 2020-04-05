@@ -6,6 +6,14 @@
 	<dict>
 		<key>Add</key>
 		<array>
+			<dict>
+				<key>Comment</key>
+				<string>SSDT-EC-USBX-AMD.aml</string>
+				<key>Path</key>
+				<string>SSDT-EC-USBX-AMD.aml</string>
+				<key>Enabled</key>
+				<true/>
+			</dict>
 		</array>
 		<key>Block</key>
 		<array>
@@ -1216,7 +1224,7 @@
 			<key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
 			<dict>
 				<key>boot-args</key>
-				<string>-v keepsyms=1 agdpmod=pikera</string>
+				<string>-v keepsyms=1 agdpmod=pikera alcid=1</string>
 				<key>csr-active-config</key>
 				<data>AAAAAA==</data>
 				<key>prev-lang:kbd</key>
@@ -1268,7 +1276,7 @@
 			</array>
 		</dict>
 		<key>WriteFlash</key>
-		<false/>
+		<true/>
 	</dict>
 	<key>PlatformInfo</key>
 	<dict>
@@ -1279,7 +1287,7 @@
 			<key>AdviseWindows</key>
 			<false/>
 			<key>MLB</key>
-			<string>C02910104J9JG36AD</string>
+			<string>C02832700QXJG36UE</string>
 			<key>ROM</key>
 			<data>ESIzAAAA</data>
 			<key>SpoofVendor</key>
@@ -1287,9 +1295,9 @@
 			<key>SystemProductName</key>
 			<string>iMacPro1,1</string>
 			<key>SystemSerialNumber</key>
-			<string>C02YD0U7HX87</string>
+			<string>C02X6NYKHX87</string>
 			<key>SystemUUID</key>
-			<string>00000000-0000-0000-0000-000000000000</string>
+			<string>DAB63509-3B3B-4DC8-A6A6-0B6265410C95</string>
 		</dict>
 		<key>UpdateDataHub</key>
 		<true/>
@@ -1308,7 +1316,7 @@
 		<array>
 			<string>ApfsDriverLoader.efi</string>
 			<string>FwRuntimeServices.efi</string>
-			<string>HfsPlus.efi</string>
+			<string>HFSPlus.efi</string>
 		</array>
 		<key>Audio</key>
 		<dict>

@@ -77,7 +77,7 @@ EHCI/XHCI Hand-off
 [see](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/AMD/AMD-config.html)
 - config.plist
     - ACPI
-        - ADD （fixme）
+        - ADD SSDT-EC-USBX-AMD.aml
         - 其余默认，quirks全部为false
     - Booter
         - 全部默认 （quirks根据 AMD-config 一致）
@@ -95,7 +95,7 @@ EHCI/XHCI Hand-off
         - Tools 不需要
         - Entries 待定
     - NVRAM
-        - boot-args 添加 agdpmod=pikera （Navi GPU）
+        - boot-args 添加 agdpmod=pikera （Navi GPU） alcid=1 (配合AppleALC ALCS1200A layout-id)
         - nvda_drv 删除
         - prev-lang:kbd: 7A682D48 616E733A 323532 （中文对应zh-Hans:252，不清楚为什么跟文档对不上）[link](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
         其它默认
@@ -108,6 +108,7 @@ EHCI/XHCI Hand-off
         - PointerSupportMode blank (ASUS)
         - RequestBootVarFallback Yes
 
+after configuration, go to [sanity check](https://opencore.slowgeek.com/)
 
 ## 部署过程
 
