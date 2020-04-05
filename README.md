@@ -46,24 +46,24 @@ Disable:
 - Compatibility Support Module (CSM)(Must be off, GPU errors like gIO are common when this option in enabled)
 
 Enable:
-- Above 4G decoding(This must be on, if you can't find the option then add npci=0x2000 to boot-args. Do not have both this option and npci enabled at the same time)
-EHCI/XHCI Hand-off
+- ~~Above 4G decoding(This must be on, if you can't find the option then add npci=0x2000 to boot-args. Do not have both this option and npci enabled at the same time)
+EHCI/XHCI Hand-off~~
 - OS type: Windows 8.1/10 UEFI Mode
 
 ### USB install
 
-[link](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/opencore-efi/winblows-install)
+see [install](https://khronokernel-2.gitbook.io/opencore-vanilla-desktop-guide/opencore-efi/winblows-install)
 
 ### EFI setup
 
 - ACPI
-    - SSDT-EC.aml （Windows下操作生成）
+    - SSDT-EC.aml （目前是选官网提供的，不行再在Windows下操作生成）
 
 - Drivers
     必须的3者
     - FwRuntimeServices.efi （给boot.efi打补丁用）
     - ApfsDriverLoader.efi （APFS支持）
-    - HfsPlus.efi （mac OS安装和恢复用的hfs支持）
+    - HFSPlus.efi （mac OS安装和恢复用的hfs支持）
 
 - Kexts
     必须的2者
@@ -73,8 +73,10 @@ EHCI/XHCI Hand-off
     - WhateverGreen.kext （GPU补丁）
     - AppleALC.kext （音频补丁）
     - RealtekRTL8111.kext （有线网络）
+    - AMDRyzenCPUPowerManagement.kext （AMD CPU 监控、超频）
+    - SMCAMDProcessor.kext （发布到 VirtualSMC，需要在 AMDRyzenCPUPowerManagement 之后）
 
-[see](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/AMD/AMD-config.html)
+see [AMD-config](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/AMD/AMD-config.html)
 - config.plist
     - ACPI
         - ADD SSDT-EC-USBX-AMD.aml
@@ -95,9 +97,9 @@ EHCI/XHCI Hand-off
         - Tools 不需要
         - Entries 待定
     - NVRAM
-        - boot-args 添加 agdpmod=pikera （Navi GPU） alcid=1 (配合AppleALC ALCS1200A layout-id)
+        - boot-args 添加 agdpmod=pikera （Navi GPU） alcid=1 (配合AppleALC ALCS1200A layout-id) npci=0x2000 (Above4GDecoding 不在bios enable)
         - nvda_drv 删除
-        - prev-lang:kbd: 7A682D48 616E733A 323532 （中文对应zh-Hans:252，不清楚为什么跟文档对不上）[link](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
+        - prev-lang:kbd: 7A682D48 616E733A 323532 （中文对应zh-Hans:252，不清楚为什么跟文档对不上）see [AppleKeyboardLayouts](https://github.com/acidanthera/OpenCorePkg/blob/master/Utilities/AppleKeyboardLayouts/AppleKeyboardLayouts.txt)
         其它默认
     - Platforminfo
         - GenSMBIOS type 1，3 then input iMacPro1,1 5 for generating 
@@ -108,10 +110,32 @@ EHCI/XHCI Hand-off
         - PointerSupportMode blank (ASUS)
         - RequestBootVarFallback Yes
 
-after configuration, go to [sanity check](https://opencore.slowgeek.com/)
+## 检查双系统
+- 在OpenCore配置使用主板的UUID作为SystemUUID，以免破坏Windows的激活环境。see [SystemUUID](http://bbs.pcbeta.com/forum.php?mod=viewthread&tid=1830968)
+- Above 4g的问题
+- 确保Windows的硬盘的EFI分区是第一个分区
+
+After configuration, go to [sanity check](https://opencore.slowgeek.com/)
 
 ## 部署过程
 
+
+## 之后
+进入系统之后要做的一些事情：
+
+- 解决 XhciPortLimit 带来的数据错误问题， see [USB-Mapping](https://github.com/khronokernel/Opencore-Vanilla-Desktop-Guide/blob/master/AMD/AMD-USB-map.md)
+- （optional）FileVault 支持
+- （optional）如果没有声音，改变 alcid 可选参见AppleALC支持列表
+- 将 USB 的 UFI 移动到系统盘
+- （optional）更新 opencore 或 Mac OS，参见[Differences.pdf](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Differences/Differences.pdf)
+- （optional）Fixing CFG Lock
+- （optional）boot-args: remove -v
+- Fix iServices
+- Fixing ROM Mac address
+- Verifying NVRAM
+
+## TROUBLESHOOTING
+see [troubleshooting](https://khronokernel.github.io/Opencore-Vanilla-Desktop-Guide/troubleshooting/troubleshooting.html)
 
 ## Reference
 
